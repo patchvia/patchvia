@@ -3,7 +3,7 @@
 All notable changes to Patchvia DNS. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 Anything a user would notice goes here. Each release gets a `## X.Y.Z` heading.
 
-## Unreleased
+## 0.1.0 - 2026-11-07
 
 ### Added
 
