@@ -1,0 +1,37 @@
+# PAUSED (open-pull-requests-limit: 0): each bump runs the full CI. Raise the limits to resume.
+# Weekly dependency updates, one pull request per app and kind of update, so a week of small bumps is one review.
+# Majors are never grouped: they arrive on their own, because they need real work.
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /dns-server
+    schedule: { interval: weekly, day: monday }
+    open-pull-requests-limit: 0
+    groups:
+      dns-server-minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /dns-console
+    schedule: { interval: weekly, day: monday }
+    open-pull-requests-limit: 0
+    groups:
+      dns-console-minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /site
+    schedule: { interval: weekly, day: monday }
+    open-pull-requests-limit: 0
+    groups:
+      site-minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly, day: monday }
+    open-pull-requests-limit: 0
+    groups:
+      actions:
+        update-types: [minor, patch]

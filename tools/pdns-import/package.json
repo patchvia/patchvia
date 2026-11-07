@@ -1,0 +1,16 @@
+{
+  "name": "pdns-import",
+  "private": true,
+  "description": "Copies zones from a PowerDNS gmysql database into Patchvia DNS",
+  "type": "module",
+  "scripts": {
+    "start": "node migrate.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "mysql2": "^3.11.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

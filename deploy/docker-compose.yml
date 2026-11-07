@@ -1,0 +1,50 @@
+# Authoritative DNS server + web console.
+#   cd deploy && cp .env.example .env   (set ADMIN_PASSWORD and SESSION_SECRET), then either
+#     docker compose up -d --build              build from this checkout (development)
+#     docker compose pull && docker compose up -d --no-build   use the published images (servers; see ../docs/DEPLOY.md)
+services:
+  dns-server:
+    image: ${PATCHVIA_REGISTRY:-ghcr.io/patchvia}/patchvia-dns-server:${PATCHVIA_TAG:-latest}
+    build: ../dns-server
+    restart: unless-stopped
+    ports:
+      - '${DNS_PORT:-53}:53/udp'
+      - '${DNS_PORT:-53}:53/tcp'
+      # The API is for the console and automation. Keep it on loopback unless you put TLS in front of it.
+      # In a cluster, other nodes reach it here: set API_BIND to this machine's private address (see ../docs/CLUSTER.md).
+      - '${API_BIND:-127.0.0.1}:${API_PORT:-8081}:8081'
+    environment:
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD in .env}
+      DEFAULT_NS: ${DEFAULT_NS:-}
+      # Who may AXFR/IXFR zones (addresses or CIDRs, comma separated). Empty disables transfers.
+      ALLOW_AXFR_FROM: ${ALLOW_AXFR_FROM:-}
+      # Secondaries told about every change (host or host:port, comma separated)
+      NOTIFY_TO: ${NOTIFY_TO:-}
+      # Abuse protection (0 disables response rate limiting)
+      RRL_RESPONSES_PER_SECOND: ${RRL_RESPONSES_PER_SECOND:-20}
+      TCP_MAX_PER_IP: ${TCP_MAX_PER_IP:-50}
+      JWT_SECRET: ${JWT_SECRET:-}
+      # Cluster (see ../docs/CLUSTER.md). Leave CLUSTER_SECRET empty for a single server.
+      CLUSTER_SECRET: ${CLUSTER_SECRET:-}
+      CLUSTER_NODE_ID: ${CLUSTER_NODE_ID:-}
+      CLUSTER_PEERS: ${CLUSTER_PEERS:-}
+      CLUSTER_ALLOW_FROM: ${CLUSTER_ALLOW_FROM:-}
+    volumes:
+      - dns-data:/data
+
+  dns-console:
+    image: ${PATCHVIA_REGISTRY:-ghcr.io/patchvia}/patchvia-dns-console:${PATCHVIA_TAG:-latest}
+    build: ../dns-console
+    restart: unless-stopped
+    depends_on:
+      dns-server:
+        condition: service_healthy
+    ports:
+      - '${CONSOLE_PORT:-3000}:3000'
+    environment:
+      DNS_API_URL: http://dns-server:8081
+      DNS_PUBLIC_API_URL: ${DNS_PUBLIC_API_URL:-http://127.0.0.1:8081}
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET (32+ characters) in .env}
+
+volumes:
+  dns-data:

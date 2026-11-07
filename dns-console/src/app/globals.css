@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/*
+ * Theme is chosen by [data-theme="light" | "dark"] on <html>. A tiny script in <head> sets it before first paint from the
+ * viewer's saved choice or their system setting (see src/lib/theme.ts), so there is no flash and no media query to keep in sync.
+ */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display:
+    var(--font-space-grotesk), var(--font-inter), system-ui, sans-serif;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  /* The brand palette itself, for the few places that want a specific brand colour rather than a role */
+  --color-brand-ink: #0b1f24;
+  --color-brand-teal: #087d74;
+  --color-brand-jade: #2ce6a3;
+  --color-brand-lime: #b8f56a;
+  --color-brand-mist: #f4f8f6;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+}
+
+/* Tailwind 4 borders default to currentcolor. Keep our themed border color everywhere, pseudo-elements included. */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: hsl(var(--border));
+  }
+
+  /* Tailwind 4 no longer gives buttons a pointer cursor */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer base {
+  /* Light: Mist surfaces, Deep Ink text, Teal as the working colour */
+  :root {
+    color-scheme: light;
+    --background: 150 22% 96%;
+    --foreground: 193 52% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 193 52% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 193 52% 9%;
+    --accent: 155 28% 92%;
+    --accent-foreground: 193 52% 9%;
+    --primary: 175 88% 26%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 155 28% 92%;
+    --secondary-foreground: 193 52% 9%;
+    --muted: 155 22% 93%;
+    --muted-foreground: 192 22% 34%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 160 14% 86%;
+    --input: 160 12% 78%;
+    --ring: 175 88% 26%;
+    --radius: 0.5rem;
+  }
+
+  /* Dark: near-black teal page, Deep Ink cards, Jade as the working colour */
+  [data-theme='dark'] {
+    color-scheme: dark;
+    --background: 193 85% 5%;
+    --foreground: 150 22% 96%;
+    --card: 193 52% 9%;
+    --card-foreground: 150 22% 96%;
+    --popover: 193 50% 11%;
+    --popover-foreground: 150 22% 96%;
+    --accent: 192 42% 15%;
+    --accent-foreground: 150 22% 96%;
+    --primary: 158 79% 54%;
+    --primary-foreground: 193 85% 5%;
+    --secondary: 192 42% 15%;
+    --secondary-foreground: 150 22% 96%;
+    --muted: 192 38% 14%;
+    --muted-foreground: 182 14% 68%;
+    --destructive: 0 72% 62%;
+    --destructive-foreground: 193 85% 4%;
+    --border: 189 40% 18%;
+    --input: 189 38% 24%;
+    --ring: 158 79% 54%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Numbers that stand alone (stat tiles, page titles) use the display face; everything else stays Inter */
+  .font-display {
+    font-feature-settings: 'ss01';
+    letter-spacing: -0.01em;
+  }
+}

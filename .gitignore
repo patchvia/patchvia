@@ -1,0 +1,23 @@
+# secrets and local configuration: never commit
+.env
+.env.*
+!.env.example
+
+# the database holds DNSSEC private keys, password hashes and the cluster state
+*.db
+*.db-shm
+*.db-wal
+data/
+
+# build output and dependencies
+node_modules/
+dist/
+.next/
+*.tsbuildinfo
+next-env.d.ts
+coverage/
+
+# editors and OS
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="410" height="455" viewBox="0 0 410 455">
+  <defs>
+    <linearGradient id="linear-gradient-1" x1="108.026" y1="169.87" x2="304.646" y2="10.564" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#006173"/>
+      <stop offset="0.32" stop-color="#00a69f"/>
+      <stop offset="0.68" stop-color="#29dea0"/>
+      <stop offset="1" stop-color="#c6fa56"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="48.848" y1="279.944" x2="257.462" y2="24.283" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#005267"/>
+      <stop offset="0.36" stop-color="#009b9f"/>
+      <stop offset="0.7" stop-color="#16d7ac"/>
+      <stop offset="1" stop-color="#88f786"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="89.822" y1="391.443" x2="284.488" y2="204.423" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#003c4d"/>
+      <stop offset="0.42" stop-color="#007b8b"/>
+      <stop offset="0.75" stop-color="#04bca9"/>
+      <stop offset="1" stop-color="#0ee3a8"/>
+    </linearGradient>
+  </defs>
+  <title>patchvia-icon.svg</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <path d="M117.389 209.655 C109.562 205.328 107.267 188.218 107.929 172.232 C108.962 147.253 119.657 130.681 144.215 117.685 L288.443 42.584 C306.841 33.337 325.577 40.117 334.948 55.518 C348.068 77.079 337.043 101.644 315.523 113.765 C249.817 145.719 183.88 177.443 117.389 209.655 Z" fill="url(#linear-gradient-1)"/>
+    <path d="M87 331 C65 332 47 318 49 296 C50 276 62 261 83 251 L334 131 C354 120 372 131 380 150 C389 173 376 199 354 211 L106 326 C100 330 94 331 87 331 Z" fill="url(#linear-gradient-2)"/>
+    <path d="M127 428 C108 429 92 416 90 397 C88 375 103 354 128 342 L338 245 L341 294 C342 319 330 332 310 343 L150 422 C142 425 134 427 127 428 Z" fill="url(#linear-gradient-3)"/>
+  </g>
+</svg>

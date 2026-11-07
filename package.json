@@ -1,0 +1,16 @@
+{
+  "name": "dns",
+  "private": true,
+  "description": "Patchvia DNS: authoritative DNS server and web console",
+  "scripts": {
+    "install:all": "npm --prefix dns-server ci && npm --prefix dns-console ci && npm --prefix tools/pdns-import ci",
+    "typecheck": "npm --prefix dns-server run typecheck && npm --prefix dns-console run typecheck",
+    "test": "npm --prefix dns-server test && npm --prefix dns-console test && npm --prefix tools/pdns-import test",
+    "build": "npm --prefix dns-server run build && npm --prefix dns-console run build",
+    "docker:build": "docker build -t patchvia-dns-server:dev dns-server && docker build -t patchvia-dns-console:dev dns-console",
+    "check": "npm run typecheck && npm test"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
