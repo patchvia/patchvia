@@ -32,6 +32,8 @@ cp .env.example .env          # set ADMIN_PASSWORD and SESSION_SECRET (32+ chara
 docker compose up -d --build  # builds from this checkout
 ```
 
+Images: [dns-server](https://github.com/patchvia/patchvia/pkgs/container/dns-server) and [dns-console](https://github.com/patchvia/patchvia/pkgs/container/dns-console), for `linux/amd64` and `linux/arm64`.
+
 On a server, use the published images instead (`docker compose pull && docker compose up -d --no-build`); see
 [docs/DEPLOY.md](docs/DEPLOY.md).
 

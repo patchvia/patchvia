@@ -4,7 +4,7 @@
 #     docker compose pull && docker compose up -d --no-build   use the published images (servers; see ../docs/DEPLOY.md)
 services:
   dns-server:
-    image: ${PATCHVIA_REGISTRY:-ghcr.io/patchvia}/patchvia-dns-server:${PATCHVIA_TAG:-latest}
+    image: ${PATCHVIA_REGISTRY:-ghcr.io/patchvia}/dns-server:${PATCHVIA_TAG:-latest}
     build: ../dns-server
     restart: unless-stopped
     ports:
@@ -33,7 +33,7 @@ services:
       - dns-data:/data
 
   dns-console:
-    image: ${PATCHVIA_REGISTRY:-ghcr.io/patchvia}/patchvia-dns-console:${PATCHVIA_TAG:-latest}
+    image: ${PATCHVIA_REGISTRY:-ghcr.io/patchvia}/dns-console:${PATCHVIA_TAG:-latest}
     build: ../dns-console
     restart: unless-stopped
     depends_on:

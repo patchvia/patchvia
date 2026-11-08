@@ -4,8 +4,8 @@ Two images, built from this repository by CI and published publicly to GitHub Co
 
 | Image | What it is |
 | --- | --- |
-| `ghcr.io/patchvia/patchvia-dns-server` | the DNS server and API (ports 53 and 8081) |
-| `ghcr.io/patchvia/patchvia-dns-console` | the web console (port 3000) |
+| `ghcr.io/patchvia/dns-server` | the DNS server and API (ports 53 and 8081) |
+| `ghcr.io/patchvia/dns-console` | the web console (port 3000) |
 
 ## Tags
 
@@ -26,12 +26,14 @@ the images without a login. This is only needed once per image.
 
 ## Run on a server
 
-You need Docker with the Compose plugin, a host with port 53 free (see the Ubuntu note below), and the `deploy/` folder
-of this repository:
+You need Docker with the Compose plugin and a host with port 53 free (see the Ubuntu note below). The two files below are
+all you download; no git and no source code are needed:
 
 ```sh
-git clone https://github.com/patchvia/patchvia.git && cd patchvia/deploy
-cp .env.example .env        # set ADMIN_PASSWORD and SESSION_SECRET (and the cluster settings, see CLUSTER.md)
+mkdir patchvia && cd patchvia
+curl -fsSLO https://raw.githubusercontent.com/patchvia/patchvia/main/deploy/docker-compose.yml
+curl -fsSL -o .env https://raw.githubusercontent.com/patchvia/patchvia/main/deploy/.env.example
+# edit .env: set ADMIN_PASSWORD and SESSION_SECRET (and the cluster settings, see CLUSTER.md)
 docker compose pull
 docker compose up -d --no-build
 ```
@@ -40,13 +42,13 @@ To update: `docker compose pull && docker compose up -d --no-build`. To pin a ve
 `PATCHVIA_TAG=sha-1a2b3c4` or `PATCHVIA_TAG=1.2.0`); the default is `latest`. To use a different registry or account, set
 `PATCHVIA_REGISTRY`.
 
-Only `deploy/` is needed on a server: you do not need Node.js or the rest of the source, only Docker.
+Only the two files are needed on a server: you do not need Node.js, git or the rest of the source, only Docker.
 
 ## Build locally instead
 
 ```sh
 cd deploy && docker compose up -d --build     # builds from this checkout and tags the same image names
-npm run docker:build                           # from the repository root: patchvia-dns-server:dev and patchvia-dns-console:dev
+npm run docker:build                           # from the repository root: dns-server:dev and dns-console:dev
 ```
 
 ## Releasing a version
