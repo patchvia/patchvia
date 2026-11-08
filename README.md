@@ -18,7 +18,6 @@ dns-console/   Next.js console (Tailwind, shadcn/Radix), Dockerfile, tests
 docs/          Public documentation: DEPLOY.md, CLUSTER.md, migration/
 tools/         pdns-import: copy zones from a PowerDNS MySQL database
 deploy/        docker-compose.yml and .env.example
-planning/      Internal notes (design history, to-do list). Not part of the public repository.
 .github/       CI
 ```
 
